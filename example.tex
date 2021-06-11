@@ -1,4 +1,4 @@
-\PassOptionsToPackage{unicode, colorlinks=true, linkcolor=blue!80!black, urlcolor=blue!80!black}{hyperref}
+\PassOptionsToPackage{unicode}{hyperref}
 \documentclass[t]{beamer}
 
 % option is one of southday, southnight and northday
@@ -50,6 +50,9 @@
   firstinits=true,
 ]{biblatex}
 \DeclareFieldFormat*{title}{\textit{#1}}
+
+\hypersetup{colorlinks=true, linkcolor=lightblue, urlcolor=lightblue}
+
 
 % just a helpful definition to get columns with a third of the textwidth
 \newlength{\thirdtextwidth}
@@ -123,6 +126,7 @@
           \caption{Toller Plot.\cite{fact-performance}}\label{fig:tollerplot}
         \end{figure}
         \columnbreak
+        \url{https://github.com/cta-observatory/ctapipe}
         \blindtext
       \end{multicols}
     \end{block}%
