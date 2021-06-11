@@ -1,0 +1,249 @@
+\ProvidesPackage{ctaposter}
+
+
+
+
+%% packages %%
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{xparse}
+\RequirePackage{tikz}
+
+%% make default text font serif and allow usage of all fonts
+\usefonttheme{serif}
+\usefonttheme{professionalfonts}
+
+\setlength{\columnsep}{1cm}
+
+\RequirePackage{fontspec}
+\setsansfont{Fira Sans}
+\setmonofont{Fira Mono}
+\renewcommand\familydefault\sfdefault
+
+
+%% add numbers to figures and tables
+\setbeamertemplate{caption}[numbered]
+
+\RequirePackage{xcolor}
+%% color definitions %%
+\definecolor{maincolor}{RGB}{6,17, 45}
+\definecolor{lightblue}{RGB}{0, 152, 195}
+\colorlet{blockBackgroundColor}{white}
+
+\colorlet{textColor}{maincolor}
+\colorlet{titleTextColor}{maincolor}
+\colorlet{backgroundColor}{white}
+
+
+
+%% bibliography settings
+\setbeamertemplate{bibliography item}[text]
+
+\setbeamercolor{bibliography entry author}{fg=maincolor}
+\setbeamercolor{bibliography entry title}{fg=maincolor}
+\setbeamercolor{bibliography entry location}{fg=maincolor}
+\setbeamercolor{bibliography entry note}{fg=maincolor}
+\setbeamercolor{bibliography item}{fg=maincolor}
+\setbeamercolor*{normal text}{fg=maincolor,bg=backgroundColor}
+
+\setbeamerfont{bibliography item}{size=\footnotesize}
+\setbeamerfont{bibliography entry author}{size=\footnotesize}
+\setbeamerfont{bibliography entry title}{size=\footnotesize}
+\setbeamerfont{bibliography entry location}{size=\footnotesize}
+\setbeamerfont{bibliography entry note}{size=\footnotesize}
+
+%% replace beamer blocks with tcolorboxes
+\newtcolorbox{myblock}[1][]{
+  enhanced,
+  frame hidden,
+  leftright skip=5mm,
+  before skip=10mm,
+  after skip=10mm,
+  boxrule=2pt,
+  sharp corners,
+  fonttitle=\usebeamerfont{block title},
+  fontupper=\usebeamerfont{block body},
+  fontlower=\usebeamerfont{block body},
+  fuzzy shadow={0mm}{-4pt}{-0.5pt}{0.5pt}{black!60!white},
+  boxsep=5mm,
+  #1,
+}
+
+\newtcolorbox{abstractblock}[1][]{
+  code={%
+    \usebeamercolor{abstract title}
+    \colorlet{titlefg}{abstract title.fg}
+    \colorlet{titlebg}{abstract title.bg}
+    \usebeamercolor{abstract}
+    \colorlet{bodyfg}{abstract.fg}
+    \colorlet{bodybg}{abstract.bg}
+  },
+  before skip=0pt,
+  leftright skip=0pt,
+  enhanced,
+  boxrule=2pt,
+  sharp corners,
+  fonttitle=\usebeamerfont{abstract title},
+  fontupper=\usebeamerfont{abstract},
+  fontlower=\usebeamerfont{abstract},
+  colupper=bodyfg,
+  colback=bodybg,
+  coltitle=titlefg,
+  colbacktitle=titlebg,
+  colframe=bodybg,
+  boxsep=5mm,
+  rounded corners=northeast,
+  width=0.7\textwidth,
+  height from=5cm to 15cm,
+  arc=2cm,
+  % minimum for equal height group=10cm,
+  % equal height group=abstract,
+  title={Abstract},
+  #1,
+}
+
+\RenewDocumentEnvironment{block}{O{} g}{%
+  \usebeamercolor{block body}%
+  \usebeamercolor{block title}%
+  \tcbset{%
+    colback=block body.bg,
+    colframe=block title.bg,
+    colbacktitle=block title.bg,
+    coltitle=block title.fg,
+  }%
+  \IfValueTF{#2}{%
+    \begin{myblock}[adjusted title={#2}, #1]%
+  }{%
+    \begin{myblock}[#1]%
+  }
+}{%
+  \par
+  \end{myblock}
+}
+\RenewDocumentEnvironment{alertblock}{O{} g}{%
+  \usebeamercolor{block body alerted}
+  \usebeamercolor{block title alerted}
+  \tcbset{%
+    colback=block body alerted.bg,
+    colframe=block title alerted.bg,
+    colbacktitle=block title alerted.bg,
+    coltitle=block title alerted.fg ,
+  }%
+  \IfValueTF{#2}{%
+    \begin{myblock}[adjusted title={#2}, #1]%
+  }{%
+    \begin{myblock}[#1]%
+  }
+}{%
+  \par
+  \end{myblock}
+}
+\RenewDocumentEnvironment{exampleblock}{O{} g}{%
+  \usebeamercolor{block body example}
+  \usebeamercolor{block title example}
+  \tcbset{%
+    colback=block body example.bg,
+    colframe=block title example.bg,
+    colbacktitle=block title example.bg,
+    coltitle=block title example.fg ,
+  }%
+  \IfValueTF{#2}{%
+    \begin{myblock}[adjusted title={#2}, #1]%
+  }{%
+    \begin{myblock}[#1]%
+  }
+}{%
+  \end{myblock}
+}
+
+
+%% customize lists
+\RequirePackage{enumitem}
+\setlist[itemize]{
+  font=\color{maincolor}\bfseries,
+  label=\textbullet,
+}
+\setlist[enumerate]{font=\color{maincolor}\bfseries, label=\arabic*.}
+\setlist[description]{font=\color{maincolor}\bfseries}
+\setlist[0]{itemsep=0.5ex, parsep=0ex, topsep=1ex, partopsep=0pt}
+\setlist[1]{itemsep=0.5ex, parsep=0ex, topsep=1ex, partopsep=0pt}
+
+
+%% no navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+\setbeamertemplate{headline}{%
+  \includegraphics[width=\paperwidth]{images/south_night.jpg}%
+  \begin{tikzpicture}[remember picture, overlay, shift=(current page.north west)]
+    \node[anchor=north west, color=white, text width=0.7\paperwidth, minimum height=7.5cm] (title) at (2cm, -2cm) {%
+      \usebeamerfont{title}%
+      \usebeamercolor{title}%
+      \inserttitle{}%
+    };
+
+    \node[anchor=north west, color=white, text width=0.9 \textwidth] (author) at (title.south west) {%
+      \usebeamerfont{author}%
+      \usebeamercolor{author}%
+      \insertauthor{}%
+    };
+  \end{tikzpicture}%
+  \begin{tikzpicture}[remember picture, overlay, shift=(current page.north east)]
+    \node[anchor=north east] at (-2cm, -2cm) {%
+      \includegraphics[height=7.5cm]{images/cta-logo-white.png}%
+    };
+  \end{tikzpicture}%
+  \vspace{-2cm}%
+  \begin{abstractblock}{}%
+    Toller Abstract Here%
+  \end{abstractblock}%
+}%
+
+\setbeamertemplate{footline}{%
+  \vspace{0.5cm}%
+  \begin{beamercolorbox}[right, ht=2cm, dp=1cm, rightskip=1cm]{footline}%
+    \hypersetup{urlcolor=footline.fg}%
+    \strut\url{www.cta-observatory.org}%
+  \end{beamercolorbox}
+}
+
+%% fonts %%
+\setbeamerfont{normal text}{size=\Large, family=\sffamily}
+\setbeamerfont{title}{
+  size=\fontsize{120}{140}\selectfont,
+  family=\sffamily,
+  series=\bfseries,
+}
+\setbeamerfont{headline}{size=\Huge, family=\sffamily}
+\setbeamerfont{author}{size=\LARGE, family=\sffamily}
+\setbeamerfont{institute}{size=\Large}
+\setbeamerfont{abstract title}{size=\Large, family=\sffamily}
+\setbeamerfont{block title}{size=\LARGE, family=\sffamily}
+\setbeamerfont{footline}{size=\Large, family=\sffamily}
+\setbeamerfont{caption name}{
+  size=\normalsize,
+  family=\sffamily,
+  series=\bfseries,
+}
+\setbeamerfont{caption}{size=\normalsize}
+
+%% colors %%
+\setbeamercolor*{headline}{fg=black, bg=backgroundColor}
+\setbeamercolor*{footline}{fg=white, bg=maincolor}
+\setbeamercolor*{abstract}{fg=white, bg=maincolor}
+\setbeamercolor*{abstract title}{fg=lightblue, bg=maincolor}
+\setbeamercolor*{normal text}{fg=maincolor, bg=backgroundColor}
+
+\setbeamercolor*{title}{fg=white}
+\setbeamercolor*{institute}{fg=black}
+\setbeamercolor*{author}{fg=black}
+
+\setbeamercolor*{block title}{fg=titleTextColor, bg=blockBackgroundColor}
+\setbeamercolor*{block body}{fg=textColor, bg=blockBackgroundColor}
+
+\setbeamercolor*{block title alerted}{fg=white, bg=maincolor}
+\setbeamercolor*{block body alerted}{fg=black, bg=white}
+
+\setbeamercolor*{block title example}{fg=white, bg=maincolor}
+\setbeamercolor*{block body example}{fg=black, bg=white}
+
+\setbeamercolor*{caption name}{fg=maincolor}
+\setbeamercolor*{caption}{fg=black}
