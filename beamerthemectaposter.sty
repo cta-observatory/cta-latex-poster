@@ -47,6 +47,11 @@
   \RenewDocumentCommand \theabstract {} {#1}%
 }%
 
+\DeclareDocumentCommand \thesupportedby {} {}
+\DeclareDocumentCommand \supportedby {+m} {%
+  \RenewDocumentCommand \thesupportedby {} {#1}%
+}%
+
 
 
 %% bibliography settings
@@ -91,6 +96,9 @@
     \colorlet{bodybg}{abstract.bg}
   },
   before skip=0pt,
+  after skip=0pt,
+  after={},
+  before={},
   leftright skip=0pt,
   enhanced,
   boxrule=2pt,
@@ -108,10 +116,31 @@
   width=0.7\textwidth,
   height from=5cm to 15cm,
   arc=2cm,
-  % minimum for equal height group=10cm,
-  % equal height group=abstract,
   title={Abstract},
   #1,
+}
+
+\newtcolorbox{supportblock}[1][]{
+  before skip=0pt,
+  after skip=0pt,
+  after={},
+  before={},
+  leftright skip=0pt,
+  enhanced,
+  frame hidden,
+  fonttitle=\usebeamerfont{abstract title},
+  fontupper=\usebeamerfont{abstract},
+  fontlower=\usebeamerfont{abstract},
+  boxsep=5mm,
+  width=0.3\textwidth,
+  height from=5cm to 15cm,
+  title={Supported By},
+  #1,
+  coltitle=lightblue,
+  colbacktitle=white,
+  colupper=maincolor,
+  colback=white,
+  height from=5cm to 11cm,
 }
 
 \RenewDocumentEnvironment{block}{O{} g}{%
@@ -224,6 +253,9 @@
   \begin{abstractblock}{}%
     \theabstract%
   \end{abstractblock}%
+  \begin{supportblock}{}%
+    \thesupportedby%
+  \end{supportblock}%
 }%
 
 \setbeamertemplate{footline}{%
@@ -271,7 +303,7 @@
   \setbeamercolor*{author}{fg=maincolor}
 \fi
 
-\setbeamercolor*{block title}{fg=titleTextColor, bg=blockBackgroundColor}
+\setbeamercolor*{block title}{fg=lightblue, bg=blockBackgroundColor}
 \setbeamercolor*{block body}{fg=textColor, bg=blockBackgroundColor}
 
 \setbeamercolor*{block title alerted}{fg=white, bg=maincolor}
