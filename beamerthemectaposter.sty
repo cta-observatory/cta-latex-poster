@@ -289,10 +289,26 @@
 
 \setbeamertemplate{footline}{%
   \vspace{0.5cm}%
-  \begin{beamercolorbox}[right, ht=2cm, dp=1cm, rightskip=1cm]{footline}%
-    \hypersetup{urlcolor=footline.fg}%
-    \strut\url{www.cta-observatory.org}%
-  \end{beamercolorbox}
+  \begin{beamercolorbox}[wd=\paperwidth, ht=2cm, dp=1cm]{footline}%
+    \begin{columns}[c, onlytextwidth]%
+      \hspace{1cm}%
+      \begin{column}{0.2\linewidth}%
+        \hfill Acknowledgements:
+      \end{column}%
+      \begin{column}{0.4\linewidth}%
+        \small%
+        We gratefully acknowledge financial support from the agencies and organizations listed here:\\
+        \hypersetup{urlcolor=footline.fg}\url{www.cta-observatory.org/consortium_acknowledgments}%
+      \end{column}%
+      \hfill%
+      \begin{column}{0.25\linewidth}%
+        \hfill%
+        \hypersetup{urlcolor=footline.fg}%
+        \strut\url{www.cta-observatory.org}%
+      \end{column}
+      \hspace{1cm}%
+    \end{columns}%
+  \end{beamercolorbox}%
 }
 
 %% fonts %%
