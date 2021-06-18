@@ -1,6 +1,8 @@
 \ProvidesPackage{ctaposter}
 
 
+\newif\if@landscape\@landscapefalse
+\DeclareOption{landscape}{\@landscapetrue}
 \newif\if@southnight\@southnighttrue
 \newif\if@southday\@southdayfalse
 \newif\if@northday\@northdayfalse
@@ -69,6 +71,7 @@
 \setbeamerfont{bibliography entry title}{size=\footnotesize}
 \setbeamerfont{bibliography entry location}{size=\footnotesize}
 \setbeamerfont{bibliography entry note}{size=\footnotesize}
+% \setbeamerfont{abstract}{size=\normalsize}
 
 %% replace beamer blocks with tcolorboxes
 \newtcolorbox{myblock}[1][]{
@@ -112,9 +115,9 @@
   colbacktitle=titlebg,
   colframe=bodybg,
   boxsep=5mm,
+  width=\linewidth,
   rounded corners=northeast,
-  width=0.7\textwidth,
-  height from=5cm to 15cm,
+  height from=5cm to 14cm,
   arc=2cm,
   title={Abstract},
   #1,
@@ -132,7 +135,7 @@
   fontupper=\usebeamerfont{abstract},
   fontlower=\usebeamerfont{abstract},
   boxsep=5mm,
-  width=0.3\textwidth,
+  width=\linewidth,
   height from=5cm to 15cm,
   title={Supported By},
   #1,
@@ -214,15 +217,48 @@
 \setbeamertemplate{navigation symbols}{}
 
 \setbeamertemplate{headline}{%
-  \if@southnight%
-    \includegraphics[width=\paperwidth]{images/south_night.jpg}%
+  \begin{tikzpicture}%
+  \node[anchor=north west, text width=\paperwidth, inner sep=0pt, outer sep=0pt] (image) at (0, 0) {%
+    \if@southnight%
+      \if@landscape%
+        \includegraphics[width=\paperwidth]{images/south_night_landscape.jpg}%
+      \else%
+        \includegraphics[width=\paperwidth]{images/south_night.jpg}%
+      \fi%
+    \else%
+      \if@southday%
+        \includegraphics[width=\paperwidth]{images/south_day.jpg}%
+      \else%
+        \includegraphics[width=\paperwidth]{images/north_day.jpg}%
+      \fi%
+    \fi%
+  };
+  \if@landscape%
+    \node[anchor=south west, text width=0.6\paperwidth, inner sep=0pt, outer sep=0pt] (abstract) at (image.south west) {%
+      \ \\[-\baselineskip] %% no idea why this is needed, but otherwise the box is in the wrong place
+      \begin{abstractblock}
+        \theabstract%
+      \end{abstractblock}%
+    };
+    \node[anchor=south east, text width=0.2\paperwidth, inner sep=0pt, outer sep=0pt] (support) at (image.south east) {%
+      \begin{supportblock}
+        \thesupportedby%
+      \end{supportblock}%
+    };
   \else%
-    \if@southday%
-      \includegraphics[width=\paperwidth]{images/south_day.jpg}%
-    \else
-      \includegraphics[width=\paperwidth]{images/north_day.jpg}%
-    \fi
-  \fi
+    \node[anchor=north west, yshift=3cm, text width=0.7\paperwidth, inner sep=0pt, outer sep=0pt] (abstract) at (image.south west) {%
+      \ \\[-\baselineskip] %% no idea why this is needed, but otherwise the box is in the wrong place
+      \begin{abstractblock}
+        \theabstract%
+      \end{abstractblock}%
+    };
+    \node[anchor=south west, text width=0.3\paperwidth, inner sep=0pt, outer sep=0pt] (support) at (abstract.south east) {%
+      \begin{supportblock}
+        \thesupportedby%
+      \end{supportblock}%
+    };
+  \fi%
+  \end{tikzpicture}%
   \begin{tikzpicture}[remember picture, overlay, shift=(current page.north west)]
     \usebeamercolor{title}%
     \node[anchor=north west, color=title.fg, text width=0.7\paperwidth, minimum height=7.5cm] (title) at (2cm, -2cm) {%
@@ -249,13 +285,6 @@
       \fi%
     };
   \end{tikzpicture}%
-  \vspace{-2cm}%
-  \begin{abstractblock}{}%
-    \theabstract%
-  \end{abstractblock}%
-  \begin{supportblock}{}%
-    \thesupportedby%
-  \end{supportblock}%
 }%
 
 \setbeamertemplate{footline}{%

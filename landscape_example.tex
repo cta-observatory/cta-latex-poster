@@ -1,14 +1,14 @@
 \PassOptionsToPackage{unicode}{hyperref}
 \documentclass[t]{beamer}
 
-% option is one of southday, southnight and northday
-\usetheme[southnight]{ctaposter}
-
 \usepackage[
-  orientation=portrait,
+  orientation=landscape,
   size=a0,
   scale=1.0,  % scale fonts with this factor
 ]{beamerposter}
+
+% option is one of southday, southnight and northday
+\usetheme[southnight,landscape]{ctaposter}
 
 \usepackage{fontspec}
 \usepackage[american]{babel}
@@ -82,13 +82,16 @@
   produce suitable input for the higher-level science tools.
   Its primary tasks include estimating the physical properties of each recorded
   shower and providing the corresponding instrument response functions.
+
   Ctapipe is a framework providing algorithms and tools to facilitate raw data calibration,
   image extraction, image parameterization and event reconstruction.
   Its main focus is currently the analysis of simulated data but it has also been successfully applied
   for the analysis of data obtained with the first CTA prototype telescopes, such as the Large Size Telescope 1.
+
   PyIRF is a library to calculate IACT instrument response functions,
   needed to obtain physics results like spectra and light curves,
   from the reconstructed event lists.
+
   Building on these two, protopipe is a prototype for the event reconstruction pipeline for CTA.
 }
 
