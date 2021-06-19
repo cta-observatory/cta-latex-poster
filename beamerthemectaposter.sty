@@ -16,6 +16,7 @@
 \RequirePackage[most]{tcolorbox}
 \RequirePackage{xparse}
 \RequirePackage{tikz}
+\RequirePackage{calc}
 
 %% make default text font serif and allow usage of all fonts
 \usefonttheme{serif}
@@ -293,22 +294,25 @@
   \end{tikzpicture}%
 }%
 
+\newcommand\ack{Acknowledgements:}
+\newcommand\ackcontent{%
+  \small%
+  We gratefully acknowledge financial support from the agencies and organizations listed here:\\
+  \hypersetup{urlcolor=footline.fg}\url{www.cta-observatory.org/consortium_acknowledgments}%
+}
 \setbeamertemplate{footline}{%
   \vspace{0.5cm}%
   \begin{beamercolorbox}[wd=\paperwidth, ht=2cm, dp=1cm]{footline}%
     \begin{columns}[c, onlytextwidth]%
       \hspace{1cm}%
-      \begin{column}{0.2\linewidth}%
-        \hfill Acknowledgements:
+      \begin{column}{\widthof{\ack}}%
+        \ack\par%
       \end{column}%
-      \begin{column}{0.4\linewidth}%
-        \small%
-        We gratefully acknowledge financial support from the agencies and organizations listed here:\\
-        \hypersetup{urlcolor=footline.fg}\url{www.cta-observatory.org/consortium_acknowledgments}%
+      \begin{column}{\widthof{\ackcontent}}%
+        \ackcontent\par%
       \end{column}%
-      \hfill%
-      \begin{column}{0.25\linewidth}%
-        \hfill%
+      \begin{column}{\paperwidth - 3cm - \widthof{\ack} - \widthof{\ackcontent}}%
+        \raggedleft%
         \hypersetup{urlcolor=footline.fg}%
         \strut\url{www.cta-observatory.org}%
       \end{column}
