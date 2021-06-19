@@ -234,28 +234,34 @@
     \fi%
   };
   \if@landscape%
-    \node[anchor=south west, text width=0.6\paperwidth, inner sep=0pt, outer sep=0pt] (abstract) at (image.south west) {%
-      \ \\[-\baselineskip] %% no idea why this is needed, but otherwise the box is in the wrong place
-      \begin{abstractblock}
-        \theabstract%
-      \end{abstractblock}%
+    \node[anchor=south west, inner sep=0pt, outer sep=0pt] (abstract) at (image.south west) {%
+      \parbox{0.6\paperwidth}{%
+        \begin{abstractblock}
+          \theabstract\par%
+        \end{abstractblock}%
+      }%
     };
-    \node[anchor=south east, text width=0.2\paperwidth, inner sep=0pt, outer sep=0pt] (support) at (image.south east) {%
-      \begin{supportblock}
-        \thesupportedby%
-      \end{supportblock}%
+    \node[anchor=south east, inner sep=0pt, outer sep=0pt] (support) at (image.south east) {%
+      \parbox{0.2\paperwidth}{%
+        \begin{supportblock}
+          \thesupportedby\par%
+        \end{supportblock}%
+      }%
     };
   \else%
-    \node[anchor=north west, yshift=3cm, text width=0.7\paperwidth, inner sep=0pt, outer sep=0pt] (abstract) at (image.south west) {%
-      \ \\[-\baselineskip] %% no idea why this is needed, but otherwise the box is in the wrong place
-      \begin{abstractblock}
-        \theabstract%
-      \end{abstractblock}%
+    \node[anchor=north west, yshift=3cm, inner sep=0pt, outer sep=0pt] (abstract) at (image.south west) {%
+      \parbox{0.7\paperwidth}{%
+        \begin{abstractblock}
+          \theabstract\par%
+        \end{abstractblock}%
+      }%
     };
-    \node[anchor=south west, text width=0.3\paperwidth, inner sep=0pt, outer sep=0pt] (support) at (abstract.south east) {%
-      \begin{supportblock}
-        \thesupportedby%
-      \end{supportblock}%
+    \node[anchor=south west, inner sep=0pt, outer sep=0pt] (support) at (abstract.south east) {%
+      \parbox{0.3\paperwidth}{%
+        \begin{supportblock}
+          \thesupportedby%
+        \end{supportblock}%
+      }%
     };
   \fi%
   \end{tikzpicture}%
@@ -263,17 +269,17 @@
     \usebeamercolor{title}%
     \node[anchor=north west, color=title.fg, text width=0.7\paperwidth, minimum height=7.5cm] (title) at (2cm, -2cm) {%
       \usebeamerfont{title}%
-      \inserttitle{}%
+      \inserttitle{}\par%
     };
     \usebeamercolor{author}%
     \node[anchor=north west, color=author.fg, text width=0.9 \textwidth] (author) at (title.south west) {%
       \usebeamerfont{author}%
-      \insertauthor{}%
+      \insertauthor{}\par%
     };
     \usebeamercolor{institute}%
     \node[anchor=north west, color=institute.fg, text width=0.9 \textwidth] (institute) at (author.south west) {%
       \usebeamerfont{institute}%
-      \insertinstitute{}%
+      \insertinstitute{}\par%
     };
   \end{tikzpicture}%
   \begin{tikzpicture}[remember picture, overlay, shift=(current page.north east)]
