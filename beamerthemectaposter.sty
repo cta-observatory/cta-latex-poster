@@ -73,7 +73,6 @@
 \setbeamerfont{bibliography entry title}{size=\footnotesize}
 \setbeamerfont{bibliography entry location}{size=\footnotesize}
 \setbeamerfont{bibliography entry note}{size=\footnotesize}
-% \setbeamerfont{abstract}{size=\normalsize}
 
 %% replace beamer blocks with tcolorboxes
 \newtcolorbox{myblock}[1][]{
@@ -237,7 +236,7 @@
   };
   \if@landscape%
     \node[anchor=south west, inner sep=0pt, outer sep=0pt] (abstract) at (image.south west) {%
-      \parbox{0.6\paperwidth}{%
+      \parbox{0.7\paperwidth}{%
         \begin{abstractblock}
           \theabstract\par%
         \end{abstractblock}%
@@ -341,6 +340,7 @@
   series=\bfseries,
 }
 \setbeamerfont{caption}{size=\normalsize}
+\setbeamerfont{abstract}{size=\normalsize}
 
 %% colors %%
 \setbeamercolor*{headline}{fg=black, bg=backgroundColor}
