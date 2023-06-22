@@ -294,14 +294,17 @@
   \end{tikzpicture}%
 }%
 
+\newcommand\shorturl[1]{%
+  \href{https://#1}{\url{#1}}%
+}
 \newcommand\ack{Acknowledgements:}
 \newcommand\ackcontent{%
   \small%
   We gratefully acknowledge financial support from the agencies and organizations listed here:\\
-  \hypersetup{urlcolor=footline.fg}\url{www.cta-observatory.org/consortium_acknowledgments}%
+  \hypersetup{urlcolor=footline.fg}\shorturl{www.cta-observatory.org/consortium_acknowledgments}%
 }
 \newcommand\homepage{%
-  \strut\href{https://www.cta-observatory.org/}{www.cta-observatory.org}%
+  \strut\shorturl{www.cta-observatory.org}%
 }%
 \setbeamertemplate{footline}{%
   \vspace{0.5cm}%
