@@ -300,6 +300,9 @@
   We gratefully acknowledge financial support from the agencies and organizations listed here:\\
   \hypersetup{urlcolor=footline.fg}\url{www.cta-observatory.org/consortium_acknowledgments}%
 }
+\newcommand\homepage{%
+  \strut\href{https://www.cta-observatory.org/}{www.cta-observatory.org}%
+}%
 \setbeamertemplate{footline}{%
   \vspace{0.5cm}%
   \begin{beamercolorbox}[wd=\paperwidth, ht=2cm, dp=1cm]{footline}%
@@ -311,10 +314,11 @@
       \begin{column}{\widthof{\ackcontent}}%
         \ackcontent\par%
       \end{column}%
-      \begin{column}{\paperwidth - 3cm - \widthof{\ack} - \widthof{\ackcontent}}%
+      \hfill%
+      \begin{column}{\widthof{\homepage}}%
         \raggedleft%
         \hypersetup{urlcolor=footline.fg}%
-        \strut\url{www.cta-observatory.org}%
+        \homepage%
       \end{column}
       \hspace{1cm}%
     \end{columns}%
